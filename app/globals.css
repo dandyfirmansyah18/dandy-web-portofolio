@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  /* Slate 900 dark theme default */
+  --foreground: #f8fafc;
 }
 
 @theme inline {
