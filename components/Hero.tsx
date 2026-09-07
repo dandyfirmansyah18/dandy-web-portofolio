@@ -1,4 +1,4 @@
-import { Globe, Mail, MapPin, Share2, Terminal } from "lucide-react";
+import { Download, Globe, Mail, MapPin, Share2, Terminal } from "lucide-react";
 
 export default function Hero() {
     return (
@@ -32,7 +32,17 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3 mt-8">
+                    {/* Tombol Download CV (Utama/Primary) */}
+                    <a
+                        href="/Dandy_Firmansyah_Resume_2026.pdf"
+                        download="Dandy_Firmansyah_Resume_2026.pdf"
+                        className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-lg transition-all text-xs font-semibold shadow-lg shadow-emerald-950/20"
+                    >
+                        <Download size={16} /> Download CV
+                    </a>
+
+                    {/* Tombol LinkedIn (Secondary) */}
                     <a
                         href="https://linkedin.com/in/dandy-firmansyah-b12332140"
                         target="_blank"
@@ -41,6 +51,8 @@ export default function Hero() {
                     >
                         <Share2 size={16} /> LinkedIn
                     </a>
+
+                    {/* Tombol GitHub & Email */}
                     <a
                         href="https://github.com/dandyfirmansyah18"
                         target="_blank"
