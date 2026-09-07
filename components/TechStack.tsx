@@ -14,7 +14,7 @@ export default function TechStack() {
         },
         {
             title: "Cloud & Reliability",
-            skills: ["Docker", "GCP (Cloud Run)", "AWS", "OpenTelemetry Tracing", "Unit Testing (10%→75%)"],
+            skills: ["Docker", "GCP (Cloud Run)", "AWS", "OpenTelemetry Tracing", "Unit Testing"],
         },
     ];
 
