@@ -1,74 +1,132 @@
-import { Download, Globe, Mail, MapPin, Share2, Terminal } from "lucide-react";
+'use client';
+
+import { Download, Globe, Mail, MapPin, Share2, Terminal, Sun, Moon, ToggleLeft } from 'lucide-react';
+import { useTheme } from '@/app/theme-context';
+import { JSX } from 'react/jsx-runtime';
 
 export default function Hero() {
-    return (
-        <section className="py-16 md:py-24 border-b border-slate-800/80 bg-gradient-to-b from-slate-950/40 to-slate-900">
-            <div className="max-w-4xl mx-auto px-6">
-                <div className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/50 mb-6">
-                    <Terminal size={14} />
-                    <span>Senior Software Engineer • 8+ YOE</span>
-                </div>
+  const { theme, setTheme } = useTheme();
 
-                <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-                    Dandy Firmansyah
-                </h1>
+  const handleThemeChange = () => {
+    const next =
+      theme === 'system'
+        ? 'light'
+        : theme === 'light'
+          ? 'dark'
+          : 'system';
+    setTheme(next);
+  };
 
-                <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8 max-w-3xl">
-                    Specializing in scalable backend infrastructure, microservices, and database performance. Proven track record in refactoring enterprise systems, migrating event pipelines, and optimizing high-throughput financial architectures across fintech and enterprise logistics.
-                </p>
+  // Theme icon based on current mode
+  let themeIcon: JSX.Element;
+  if (theme === 'system') themeIcon = <ToggleLeft className="h-4 w-4" />;
+  else if (theme === 'dark') themeIcon = <Moon className="h-4 w-4" />;
+  else themeIcon = <Sun className="h-4 w-4" />;
 
-                <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 mb-8">
-                    <div className="flex items-center gap-1.5">
-                        <MapPin size={14} className="text-slate-400" />
-                        <span>Malang, Indonesia</span>
-                    </div>
-                    <span className="text-slate-700">•</span>
-                    <div className="flex items-center gap-2 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-1 rounded-full text-emerald-400">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                        <span>Open to Senior / Staff IC & Global Remote</span>
-                    </div>
-                </div>
+  return (
+    <section className="relative py-16 md:py-24 overflow-hidden" id="main-content">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 -z-10">
+        <div className="h-full w-full bg-[url('/file.svg')] bg-[length:300px_300px] opacity-5"></div>
+      </div>
 
-                <div className="flex flex-wrap gap-3 mt-8">
-                    {/* Tombol Download CV (Utama/Primary) */}
-                    <a
-                        href="/Dandy_Firmansyah_Resume_2026.pdf"
-                        download="Dandy_Firmansyah_Resume_2026.pdf"
-                        className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-lg transition-all text-xs font-semibold shadow-lg shadow-emerald-950/20"
-                    >
-                        <Download size={16} /> Download CV
-                    </a>
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
+        {/* Header with Theme Toggle */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
+          <div className="flex items-center space-x-3 mb-4 md:mb-0">
+            <Terminal className="h-5 w-5" />
+            <span className="text-sm font-mono px-3 py-1 rounded-full bg-surface-2/50 border border-surface-2">
+              Senior Software Engineer • 8+ YOE
+            </span>
+          </div>
 
-                    {/* Tombol LinkedIn (Secondary) */}
-                    <a
-                        href="https://linkedin.com/in/dandy-firmansyah-b12332140"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2.5 rounded-lg transition-all text-xs font-semibold shadow-lg shadow-cyan-950/20"
-                    >
-                        <Share2 size={16} /> LinkedIn
-                    </a>
+          <button
+            onClick={handleThemeChange}
+            className="p-2 rounded-full hover:bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
+            aria-label="Toggle theme"
+          >
+            {themeIcon}
+          </button>
+        </div>
 
-                    {/* Tombol GitHub & Email */}
-                    <a
-                        href="https://github.com/dandyfirmansyah18"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2.5 rounded-lg transition-all text-xs font-semibold"
-                    >
-                        <Globe size={16} /> GitHub
-                    </a>
-                    <a
-                        href="mailto:dandyfirmansyah1998@gmail.com"
-                        className="flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2.5 rounded-lg transition-all text-xs font-semibold"
-                    >
-                        <Mail size={16} /> Email Me
-                    </a>
-                </div>
-            </div>
-        </section>
-    );
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground mb-6 max-w-2xl">
+          Dandy Firmansyah
+        </h1>
+
+        <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8 max-w-3xl">
+          Specializing in scalable backend infrastructure, microservices, and database performance.
+          Proven track record in refactoring enterprise systems, migrating event pipelines, and
+          optimizing high-throughput financial architectures across fintech and enterprise logistics.
+        </p>
+
+        <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-foreground/50 mb-8">
+          <div className="flex items-center gap-1.5">
+            <MapPin size={14} />
+            <span>Malang, Indonesia</span>
+          </div>
+          <span className="text-foreground/30">•</span>
+          <div className="flex items-center gap-2 bg-surface-2 px-3 py-1 rounded-full">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary/25"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
+            </span>
+            <span>Open to Senior / Staff IC & Global Remote</span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-4 mb-8">
+          {/* Primary CTA - Download CV */}
+          <a
+            href="/Dandy_Firmansyah_Resume_2026.pdf"
+            download="Dandy_Firmansyah_Resume_2026.pdf"
+            className="flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-dark text-white px-5 py-2.5 rounded-lg font-semibold transition-all hover-lift"
+          >
+            <Download size={16} /> Download CV
+          </a>
+
+          {/* Secondary CTA - View Case Studies */}
+          <a
+            href="#case-studies"
+            className="flex items-center gap-2 border border-surface-2 px-5 py-2.5 rounded-lg font-semibold transition-all hover-lift hover:bg-surface-2 hover:text-foreground/90"
+          >
+            <Share2 size={16} /> View Case Studies
+          </a>
+
+          {/* Tertiary CTA - LinkedIn */}
+          <a
+            href="https://linkedin.com/in/dandy-firmansyah-b12332140"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 bg-surface-2 px-4 py-2.5 rounded-lg font-semibold transition-all hover-lift hover:bg-surface-3 hover:text-foreground"
+          >
+            <Globe size={16} /> LinkedIn
+          </a>
+
+          {/* Email */}
+          <a
+            href="mailto:dandyfirmansyah1998@gmail.com"
+            className="flex items-center gap-2 bg-surface-2 px-4 py-2.5 rounded-lg font-semibold transition-all hover-lift hover:bg-surface-3 hover:text-foreground"
+          >
+            <Mail size={16} /> Email
+          </a>
+        </div>
+
+        {/* Social Proof / Metrics */}
+        <div className="grid md:grid-cols-3 gap-6 pt-8 border-t border-surface-2">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-brand-primary">8+</div>
+            <div className="text-sm text-foreground/60">Years Experience</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-brand-primary">4+</div>
+            <div className="text-sm text-foreground/60">Major Companies</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-brand-primary">12+</div>
+            <div className="text-sm text-foreground/60">Systems Modernized</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -4,24 +4,206 @@
   --background: #0f172a;
   /* Slate 900 dark theme default */
   --foreground: #f8fafc;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand Colors - Distinctive Indigo Palette */
+  --brand-primary: #4f46e5;
+  --brand-primary-dark: #4338ca;
+  --brand-primary-light: #6366f1;
+
+  --brand-secondary: #10b981;
+  --brand-secondary-dark: #059669;
+  --brand-secondary-light: #34d399;
+
+  --brand-accent: #f59e0b;
+  --brand-accent-dark: #d97706;
+  --brand-accent-light: #fbbf24;
+
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Surface Elevations */
+  --surface-1: #1118270a;
+  --surface-2: #11182712;
+  --surface-3: #1118271a;
+
+  /* Border Radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Transition Duration */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Surface Elevations (Dark) */
+    --surface-1: rgba(255, 255, 255, 0.03);
+    --surface-2: rgba(255, 255, 255, 0.05);
+    --surface-3: rgba(255, 255, 255, 0.08);
   }
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --surface-1: rgba(15, 23, 42, 0.03);
+  --surface-2: rgba(15, 23, 42, 0.05);
+  --surface-3: rgba(15, 23, 42, 0.08);
+
+  /* Brand Colors (Light variants - same hues, adjusted lightness) */
+  --brand-primary: #4f46e5;
+  --brand-primary-dark: #4338ca;
+  --brand-primary-light: #6366f1;
+
+  --brand-secondary: #10b981;
+  --brand-secondary-dark: #059669;
+  --brand-secondary-light: #34d399;
+
+  --brand-accent: #f59e0b;
+  --brand-accent-dark: #d97706;
+  --brand-accent-light: #fbbf24;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-normal: 0ms;
+    --transition-slow: 0ms;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Brand Colors */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-dark: var(--brand-primary-dark);
+  --color-brand-primary-light: var(--brand-primary-light);
+
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-dark: var(--brand-secondary-dark);
+  --color-brand-secondary-light: var(--brand-secondary-light);
+
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-dark: var(--brand-accent-dark);
+  --color-brand-accent-light: var(--brand-accent-light);
+
+  /* Semantic Colors */
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --color-info: var(--color-info);
+
+  /* Surface Colors */
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Border Radius */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* Transitions */
+  --transition-fast: var(--transition-fast);
+  --transition-normal: var(--transition-normal);
+  --transition-slow: var(--transition-slow);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Focus Visible Styles for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Custom focus ring utility */
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
+
+/* Hover and active states for better feedback */
+.hover-lift {
+  @apply transition-transform duration-200 hover:-translate-y-1;
+}
+
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
+}
+
+.pressed-scale {
+  @apply active:scale-95;
+}
+
+/* Glassmorphism effect */
+.glass {
+  @applysurface-1/50 backdrop-blur-sm border border-surface-2/50;
+}
+
+/* Animation keyframes */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-ping {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
